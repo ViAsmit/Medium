@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
-let dbURI =
-  "mongodb+srv://admin:Admin@962@cluster0.ssvjz.mongodb.net/mediumDB?retryWrites=true&w=majority";
+require("dotenv").config();
+
+let dbURI = process.env.DB;
 
 if (process.env.NODE_ENV === "production") {
   dbURI = process.env.MONGODB_URI;
@@ -14,7 +15,7 @@ console.log("======================");
 
 mongoose.connection.on("connected", () => {
   console.log("======================");
-  console.log(`Mongoose connected to ${dbURI}`);
+  console.log(`Mongoose connected to ${dbURI.substr(0, 15)}`);
   console.log("======================");
 });
 
