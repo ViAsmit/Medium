@@ -55,5 +55,5 @@ process.on("SIGTERM", () => {
   });
 });
 
-// require("./users");
-// require("./passport");
+require("./users");
+require("./passport");
