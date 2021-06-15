@@ -1,6 +1,7 @@
 const passport = require("passport");
 const mongoose = require("mongoose");
 const User = mongoose.model("User");
+const Article = mongoose.model("Article");
 
 const registerUser = ({ body }, res) => {
   if (!body.email || !body.password || !body.password_confirm) {
@@ -52,7 +53,37 @@ const loginUser = (req, res) => {
   })(req, res);
 };
 
+const getUser = (req, res, next) => {
+  console.log(req.query);
+  // res.send("ok");
+  User.findById(req.query.user_id).then((user) => {
+    return Article.find({ author: req.query.user_id }).then((_arts) => {
+      return res.json({ user: user, articles: _arts });
+    });
+  });
+};
+
+const followUser = (req, res, next) => {
+  User.findById(req.body.user_id).then((user) => {
+    return user
+      .follow(req.body.to_follow_id)
+      .then(() => {
+        User.findById(req.body.to_follow_id).then((user) => {
+          return user
+            .addFollower(req.body.user_id)
+            .then(() => {
+              return res.json({ msg: "followed" });
+            })
+            .catch(next);
+        });
+      })
+      .catch(next);
+  });
+};
+
 module.exports = {
   registerUser,
   loginUser,
+  getUser,
+  followUser,
 };

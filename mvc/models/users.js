@@ -59,11 +59,14 @@ userSchema.methods.follow = function (userId) {
   if (this.following.indexOf(userId) === -1) {
     this.following.push(userId);
   }
-  this.save();
+  return this.save();
 };
 
 userSchema.methods.addFollower = function (userId) {
-  this.followers.push(userId);
+  if (this.followers.indexOf(userId) === -1) {
+    this.followers.push(userId);
+  }
+  return this.save();
 };
 
 mongoose.model("User", userSchema);
