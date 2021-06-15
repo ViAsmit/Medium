@@ -3,11 +3,13 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+var bodyParser = require("body-parser");
 
 require("./mvc/models/db");
 
 var indexRouter = require("./mvc/routes/index");
 var usersRouter = require("./mvc/routes/users");
+const articleRouter = require("./mvc/routes/articles");
 
 var app = express();
 
@@ -34,6 +36,8 @@ app.use("/", (req, res, next) => {
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/posts", articleRouter);
+
 app.use((req, res, next) => {
   res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
 });

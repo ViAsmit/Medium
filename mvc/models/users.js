@@ -15,6 +15,18 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "default-avatar",
   },
+  followers: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
+  following: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 });
 
 userSchema.methods.setPassword = function (password) {
@@ -41,6 +53,17 @@ userSchema.methods.getJwt = function () {
     },
     process.env.JWT_TOKEN
   );
+};
+
+userSchema.methods.follow = function (userId) {
+  if (this.following.indexOf(userId) === -1) {
+    this.following.push(userId);
+  }
+  this.save();
+};
+
+userSchema.methods.addFollower = function (userId) {
+  this.followers.push(userId);
 };
 
 mongoose.model("User", userSchema);
