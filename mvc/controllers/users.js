@@ -33,7 +33,9 @@ const registerUser = ({ body }, res) => {
       console.log("===============");
       console.log(newUser);
       console.log("===============");
-      return res.status(201).json({ message: "Created user", token });
+      return res
+        .status(201)
+        .json({ message: "Created user", token: token, uid: newUser._id });
     }
   });
 };
@@ -46,7 +48,9 @@ const loginUser = (req, res) => {
   passport.authenticate("local", (err, user, info) => {
     if (user) {
       const token = user.getJwt();
-      return res.status(201).json({ message: "Logged In", token });
+      return res
+        .status(201)
+        .json({ message: "Logged In", token: token, uid: user._id });
     } else {
       return res.status(401).json(info);
     }

@@ -1,13 +1,14 @@
 var express = require("express");
 var router = express.Router();
 const articleCtl = require("../controllers/articles");
+const middleware = require("./middleware/middleware");
 
 router.get("/", articleCtl.getArticles);
 
-router.post("/", articleCtl.addArticle);
+router.post("/", middleware.authorize, articleCtl.addArticle);
 
-router.post("/clap", articleCtl.clapArticle);
+router.post("/clap", middleware.authorize, articleCtl.clapArticle);
 
-router.post("/comment", articleCtl.commentArticle);
+router.post("/comment", middleware.authorize, articleCtl.commentArticle);
 
 module.exports = router;
