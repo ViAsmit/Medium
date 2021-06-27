@@ -4,7 +4,7 @@ const User = mongoose.model("User");
 const Article = mongoose.model("Article");
 
 const registerUser = ({ body }, res) => {
-  if (!body.email || !body.password || !body.password_confirm) {
+  if (!body.email || !body.password || !body.password_confirm || !body.name) {
     return res.send({ message: "All Feilds Required" });
   }
   if (body.password !== body.password_confirm) {
@@ -13,6 +13,7 @@ const registerUser = ({ body }, res) => {
 
   const user = new User();
   user.email = body.email;
+  user.name = body.name;
   user.setPassword(body.password);
 
   console.log("=====================");
