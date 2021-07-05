@@ -62,9 +62,12 @@ const getUser = (req, res, next) => {
   console.log(req.query);
   // res.send("ok");
   User.findById(req.query.user_id).then((user) => {
-    return Article.find({ author: req.query.user_id }).then((_arts) => {
-      return res.json({ user: user, articles: _arts });
-    });
+    return Article.find({ author: req.query.user_id })
+      .populate("author")
+      .populate("comments.author")
+      .then((_arts) => {
+        return res.json({ user: user, articles: _arts });
+      });
   });
 };
 

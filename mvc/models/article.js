@@ -6,6 +6,10 @@ const articleSchema = new mongoose.Schema({
   description: String,
   feature_img: String,
   claps: Number,
+  date: {
+    type: Date,
+    default: Date.now,
+  },
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",

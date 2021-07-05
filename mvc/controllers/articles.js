@@ -4,14 +4,14 @@ const Article = mongoose.model("Article");
 
 const addArticle = (req, res, next) => {
   console.log(req.body);
-  const { text, title, claps, description, author_id } = req.body;
+  const { text, title, claps, description, feature_img, author_id } = req.body;
 
   const obj = {
     text,
     title,
     claps,
     description,
-    feature_img: "",
+    feature_img,
     author: author_id,
   };
 
