@@ -1,0 +1,15 @@
+{
+  "paths": [
+    {
+      "path": "/404/"
+    },
+    {
+      "path": "/404.html"
+    },
+    {
+      "path": "/"
+    }
+  ],
+  "redirects": [],
+  "pathPrefix": ""
+}
