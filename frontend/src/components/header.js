@@ -52,13 +52,13 @@ function Header() {
             justifyContent="flex-end"
             alignItems="center"
           >
-            <Typography variant="p" className={classes.links}>
+            <Typography variant="body1" className={classes.links}>
               Our Story
             </Typography>
-            <Typography variant="p" className={classes.links}>
+            <Typography variant="body1" className={classes.links}>
               Membership
             </Typography>
-            <Typography variant="p" className={classes.links}>
+            <Typography variant="body1" className={classes.links}>
               Write
             </Typography>
             <Button variant="contained" className={classes.button}>

@@ -40,7 +40,7 @@ function Introdutory() {
     <div className={classes.root}>
       <Container className={classes.container}>
         <Grid container>
-          <Grid xs={5}>
+          <Grid container xs={5}>
             <Typography variant="h2" className={classes.heading}>
               Medium is a place to write, read and connect
             </Typography>

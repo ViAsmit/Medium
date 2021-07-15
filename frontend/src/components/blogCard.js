@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
   },
   title: {
-    fontSize: "20px",
+    fontSize: "21px",
     fontWeight: "900",
   },
   cover: {
@@ -53,6 +53,7 @@ function BlogCard() {
         className={classes.cover}
         image={person}
         title="Live from space album cover"
+        alt="image"
       />
     </Card>
   );

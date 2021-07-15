@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     width: "80%",
   },
   title: {
-    fontWeight: "900",
+    fontWeight: "910",
   },
   name: {
     fontSize: 14,
