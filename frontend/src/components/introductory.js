@@ -40,7 +40,7 @@ function Introdutory() {
     <div className={classes.root}>
       <Container className={classes.container}>
         <Grid container>
-          <Grid container xs={5}>
+          <Grid item xs={5}>
             <Typography variant="h2" className={classes.heading}>
               Medium is a place to write, read and connect
             </Typography>
@@ -56,11 +56,13 @@ function Introdutory() {
           </Grid>
           <Grid
             xs={7}
+            item
             container
             justifyContent="flex-end"
             alignContent="flex-end"
           >
             <StaticImage
+              alt="logo"
               src="../images/scribble.png"
               width={350}
               height={350}

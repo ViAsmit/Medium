@@ -10,6 +10,14 @@ const theme = createTheme({
       "sans-serif",
     ],
   },
+  palette: {
+    primary: {
+      main: "#000000",
+    },
+    secondary: {
+      main: "#008000",
+    },
+  },
 });
 
 export default theme;

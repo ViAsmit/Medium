@@ -1,9 +1,9 @@
 import { FETCH_POSTS } from "./postTypes";
-import axios from "axios";
+import axiosInstance from "../../axios";
 
 export const fetchPosts = () => {
   return (dispatch) => {
-    axios
+    axiosInstance
       .get("/posts")
       .then((response) => {
         dispatch({

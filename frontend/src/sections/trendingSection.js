@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Container,
   ListItem,
@@ -8,10 +8,13 @@ import {
 } from "@material-ui/core";
 import TrendingCards from "../components/trendingCards";
 import TrendingUpIcon from "@material-ui/icons/TrendingUp";
+import { connect } from "react-redux";
+import { fetchPosts } from "../redux/posts/postActions";
 
 const useStyle = makeStyles((theme) => ({
   trending: {
     display: "flex",
+    flexWrap: "wrap",
   },
   heading: {
     fontWeight: "800 !important",
@@ -23,8 +26,12 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
-function TrendingSection() {
+function TrendingSection({ posts, updatePosts }) {
   const classes = useStyle();
+
+  useEffect(() => {
+    updatePosts();
+  }, [updatePosts]);
   return (
     <div>
       <Container style={{ marginTop: "20px" }}>
@@ -38,17 +45,24 @@ function TrendingSection() {
         </ListItem>
       </Container>
       <Container className={classes.trending}>
-        <TrendingCards />
-        <TrendingCards />
-        <TrendingCards />
-      </Container>
-      <Container className={classes.trending}>
-        <TrendingCards />
-        <TrendingCards />
-        <TrendingCards />
+        {posts.map((post, idx) => (
+          <TrendingCards key={idx} post={post} />
+        ))}
       </Container>
     </div>
   );
 }
 
-export default TrendingSection;
+const mapStateToProps = (state) => {
+  return {
+    posts: state.posts.posts,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updatePosts: async () => await dispatch(fetchPosts()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TrendingSection);

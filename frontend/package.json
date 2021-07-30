@@ -15,10 +15,10 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
-    "@material-ui/core": "^4.12.1",
+    "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
     "axios": "^0.21.1",
-    "gatsby": "^3.9.0",
+    "gatsby": "^3.10.2",
     "gatsby-plugin-gatsby-cloud": "^2.9.0",
     "gatsby-plugin-image": "^1.9.0",
     "gatsby-plugin-material-ui": "^3.0.1",
@@ -26,6 +26,7 @@
     "gatsby-plugin-sharp": "^3.9.0",
     "gatsby-source-filesystem": "^3.9.0",
     "gatsby-transformer-sharp": "^3.9.0",
+    "mongodb-client-encryption": "^1.2.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-redux": "^7.2.4",

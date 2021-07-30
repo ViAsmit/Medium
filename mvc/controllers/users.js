@@ -34,9 +34,12 @@ const registerUser = ({ body }, res) => {
       console.log("===============");
       console.log(newUser);
       console.log("===============");
-      return res
-        .status(201)
-        .json({ message: "Created user", token: token, uid: newUser._id });
+      return res.status(201).json({
+        message: "Created user",
+        token: token,
+        uid: newUser._id,
+        user: newUser,
+      });
     }
   });
 };
@@ -49,9 +52,13 @@ const loginUser = (req, res) => {
   passport.authenticate("local", (err, user, info) => {
     if (user) {
       const token = user.getJwt();
-      return res
-        .status(201)
-        .json({ message: "Logged In", token: token, uid: user._id });
+      console.log(user);
+      return res.status(201).json({
+        message: "Logged In",
+        token: token,
+        uid: user._id,
+        user: user,
+      });
     } else {
       return res.status(401).json(info);
     }

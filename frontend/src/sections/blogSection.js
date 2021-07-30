@@ -6,8 +6,10 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import BlogCard from "../components/blogCard";
+import { fetchPosts } from "../redux/posts/postActions";
 
 const useStyle = makeStyles((theme) => ({
   root: {},
@@ -34,16 +36,20 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
-function BlogSection() {
+function BlogSection({ posts, updatePosts }) {
   const classes = useStyle();
+
+  useEffect(() => {
+    updatePosts();
+  }, [updatePosts]);
+
   return (
     <Container>
       <Grid container direction="row" justifyContent="space-around">
         <Grid className={classes.blogs}>
-          <BlogCard />
-          <BlogCard />
-          <BlogCard />
-          <BlogCard />
+          {posts.map((post, idx) => (
+            <BlogCard post={post} key={idx} />
+          ))}
         </Grid>
         <Grid className={classes.tags}>
           <Typography variant="body1" className={classes.tagTitle}>
@@ -99,4 +105,17 @@ function BlogSection() {
     </Container>
   );
 }
-export default BlogSection;
+
+const mapStateToProps = (state) => {
+  return {
+    posts: state.posts.posts,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updatePosts: async () => await dispatch(fetchPosts()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(BlogSection);

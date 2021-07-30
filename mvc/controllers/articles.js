@@ -43,7 +43,7 @@ const getArticles = (req, res, next) => {
   } else {
     Article.find()
       .populate("author")
-      .populate("comments.author")
+      .populate("author.comments")
       .exec((err, art) => {
         if (err) res.send(err);
         else if (!art) res.send(404);

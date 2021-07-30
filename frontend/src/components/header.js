@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -6,6 +6,9 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { StaticImage } from "gatsby-plugin-image";
 import { Container, Grid } from "@material-ui/core";
+import SignInModal from "./SignInModal";
+import RegisterModal from "./RegisterModal";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   header: {
@@ -17,21 +20,26 @@ const useStyles = makeStyles((theme) => ({
   logo: {
     // marginLeft: theme.spacing(40),
   },
-  button: {
+  buttons: {
     borderRadius: "25px",
     color: "white",
     backgroundColor: "black",
   },
   links: {
     paddingRight: theme.spacing(3),
+    background: "transparent",
+    border: "none",
+    cursor: "pointer",
   },
   actions: {
     // marginRight: theme.spacing(40),
   },
 }));
 
-function Header() {
+function Header({ user }) {
   const classes = useStyles();
+  const [open, setopen] = useState(false);
+  const [openR, setopenR] = useState(false);
 
   return (
     <AppBar position="sticky" className={classes.header}>
@@ -61,14 +69,36 @@ function Header() {
             <Typography variant="body1" className={classes.links}>
               Write
             </Typography>
-            <Button variant="contained" className={classes.button}>
-              Get Started
+            {user.name === "" && (
+              <Typography
+                component="button"
+                variant="body1"
+                className={classes.links}
+                onClick={() => setopen(true)}
+              >
+                Sign In
+              </Typography>
+            )}
+            <Button
+              variant="contained"
+              className={classes.buttons}
+              onClick={() => (user.name === "" ? setopenR(true) : {})}
+            >
+              {user.name !== "" ? `Hi ${user.name}` : "Get Started"}
             </Button>
           </Grid>
         </Toolbar>
+        <SignInModal open={open} setopen={setopen} />
+        <RegisterModal open={openR} setopen={setopenR} />
       </Container>
     </AppBar>
   );
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps, null)(Header);

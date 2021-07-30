@@ -11,6 +11,8 @@ import {
   ListItemAvatar,
   ListItemText,
 } from "@material-ui/core";
+import { convertDateToHuman } from "../utils/date";
+import { Link } from "gatsby";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,33 +35,42 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "800",
     color: "#D3D3D3",
   },
+  link: {
+    color: "black",
+    textDecoration: "none",
+  },
 }));
 
-function TrendingCard() {
+function TrendingCard({ post }) {
   const classes = useStyles();
 
   return (
-    <Grid container>
+    <Grid container item xs={4}>
       <Typography className={classes.number}>01</Typography>
       <Card className={classes.root} elevation={0}>
-        <CardContent>
-          <ListItem button style={{ padding: "0" }}>
-            <ListItemAvatar style={{ minWidth: "30px" }}>
-              <Avatar
-                alt="Asmit Vimal"
-                src={person}
-                className={classes.avatar}
+        <Link to="/post" className={classes.link}>
+          <CardContent>
+            <ListItem button style={{ padding: "0" }}>
+              <ListItemAvatar style={{ minWidth: "30px" }}>
+                <Avatar
+                  alt="Asmit Vimal"
+                  src={person}
+                  className={classes.avatar}
+                />
+              </ListItemAvatar>
+              <ListItemText
+                primary={post.author.name}
+                className={classes.name}
               />
-            </ListItemAvatar>
-            <ListItemText primary="Asmit Vimal" className={classes.name} />
-          </ListItem>
-          <Typography className={classes.title} gutterBottom>
-            5 solved end-to-end Data Science Projects in Python
-          </Typography>
-          <Typography className={classes.pos} color="textSecondary">
-            July 10 - 3 min read
-          </Typography>
-        </CardContent>
+            </ListItem>
+            <Typography className={classes.title} gutterBottom>
+              {post.text}
+            </Typography>
+            <Typography className={classes.pos} color="textSecondary">
+              {convertDateToHuman(post.date)} - 3 min read
+            </Typography>
+          </CardContent>
+        </Link>
       </Card>
     </Grid>
   );

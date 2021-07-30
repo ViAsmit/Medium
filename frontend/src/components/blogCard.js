@@ -6,6 +6,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import person from "../images/person.jpeg";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
+import { Grid } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,39 +23,45 @@ const useStyles = makeStyles((theme) => ({
   },
   cover: {
     width: 250,
+    alignItems: "right",
   },
   sub: {
     fontSize: "15px",
   },
 }));
 
-function BlogCard() {
+function BlogCard({ post }) {
   const classes = useStyles();
+  // console.log(post);
 
   return (
     <Card className={classes.root} elevation={0}>
-      <div className={classes.details}>
-        <CardContent className={classes.content}>
-          <Typography variant="h6" className={classes.title}>
-            This Long Awaited Technology May Finally Change The World
-          </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
-            Solid-state batteries are posied to emerge in the coming years.
-          </Typography>
-          <div style={{ width: "90%", display: "inline-block" }}>
-            <Typography className={classes.sub} color="textSecondary">
-              May 30 - 6 min read ★
+      <Grid container direction="row">
+        <Grid container item xs={8} direction="column">
+          <CardContent className={classes.content}>
+            <Typography variant="h6" className={classes.title}>
+              {post.title}
             </Typography>
-          </div>
-          <BookmarkBorderIcon />
-        </CardContent>
-      </div>
-      <CardMedia
-        className={classes.cover}
-        image={person}
-        title="Live from space album cover"
-        alt="image"
-      />
+            <Typography variant="subtitle1" color="textSecondary">
+              {post.text}
+            </Typography>
+            <div style={{ width: "90%", display: "inline-block" }}>
+              <Typography className={classes.sub} color="textSecondary">
+                May 30 - 6 min read ★
+              </Typography>
+            </div>
+            <BookmarkBorderIcon />
+          </CardContent>
+        </Grid>
+        <Grid container justifyContent="flex-end" item xs={4}>
+          <CardMedia
+            className={classes.cover}
+            image={person}
+            title="Live from space album cover"
+            alt="image"
+          />
+        </Grid>
+      </Grid>
     </Card>
   );
 }
