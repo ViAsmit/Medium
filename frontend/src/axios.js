@@ -1,6 +1,10 @@
 import axios from "axios";
 
-const baseURL = "http://localhost:5000";
+var baseURL = "http://localhost:5000";
+
+if (process.env.NODE_ENV === "production") {
+  baseURL = "https://medium-server.herokuapp.com";
+}
 
 const axiosInstance = axios.create({
   baseURL: baseURL,
