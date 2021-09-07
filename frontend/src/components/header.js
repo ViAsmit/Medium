@@ -17,9 +17,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     height: "8vh",
   },
-  logo: {
-    // marginLeft: theme.spacing(40),
-  },
+  logo: {},
   buttons: {
     borderRadius: "25px",
     color: "white",
@@ -32,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
   },
   actions: {
-    // marginRight: theme.spacing(40),
+    marginTop: theme.spacing(2),
   },
 }));
 
@@ -40,6 +38,12 @@ function Header({ user }) {
   const classes = useStyles();
   const [open, setopen] = useState(false);
   const [openR, setopenR] = useState(false);
+
+  const signOut = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("uid");
+    window.location.reload();
+  };
 
   return (
     <AppBar position="sticky" className={classes.header}>
@@ -69,7 +73,7 @@ function Header({ user }) {
             <Typography variant="body1" className={classes.links}>
               Write
             </Typography>
-            {user.name === "" && (
+            {user.name === "" ? (
               <Typography
                 component="button"
                 variant="body1"
@@ -77,6 +81,15 @@ function Header({ user }) {
                 onClick={() => setopen(true)}
               >
                 Sign In
+              </Typography>
+            ) : (
+              <Typography
+                component="button"
+                variant="body1"
+                className={classes.links}
+                onClick={signOut}
+              >
+                Sign Out
               </Typography>
             )}
             <Button

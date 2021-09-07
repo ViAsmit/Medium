@@ -48,7 +48,11 @@ function TrendingCard({ post }) {
     <Grid container item xs={4}>
       <Typography className={classes.number}>01</Typography>
       <Card className={classes.root} elevation={0}>
-        <Link to="/post" className={classes.link}>
+        <Link
+          to={`posts/${post._id}`}
+          state={{ post: post }}
+          className={classes.link}
+        >
           <CardContent>
             <ListItem button style={{ padding: "0" }}>
               <ListItemAvatar style={{ minWidth: "30px" }}>

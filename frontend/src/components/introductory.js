@@ -46,8 +46,8 @@ function Introdutory() {
             </Typography>
             <br />
             <Typography variant="h6" className={classes.subheading}>
-              It's easy and free to host to post your thinking on any topic and
-              connect with million of readers.
+              It's easy and free to post your thinking on any topic and connect
+              with million of readers.
             </Typography>
             <br />
             <Button variant="outlined" className={classes.button}>

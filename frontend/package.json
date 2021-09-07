@@ -17,6 +17,7 @@
   "dependencies": {
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
+    "@raygesualdo/gatsby-plugin-babel-styled-components": "^1.0.1",
     "axios": "^0.21.1",
     "gatsby": "^3.10.2",
     "gatsby-plugin-gatsby-cloud": "^2.9.0",
